@@ -1,0 +1,17 @@
+[diff]
+	tool = vscode
+[difftool]
+	prompt = false
+[alias]
+	a = add
+	d = diff
+	b = branch
+	s = status
+	vimdiff = difftool
+	la = log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(blue)<%an>%Creset' --abbrev-commit --all
+	l = log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%ar)%Creset %C(blue)<%aN>%Creset' --abbrev-commit 
+[user]
+	name = Timothy Shiu
+	email = timoweave@gmail.com
+[difftool "vscode"]
+	cmd = "code --wait --diff  "
