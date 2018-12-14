@@ -2,11 +2,15 @@
 	tool = vscode
 [difftool]
 	prompt = false
+[color]
+	ui = auto
 [alias]
 	a = add
 	d = diff
 	b = branch
 	s = status
+	ci = commit 
+	co = checkout 
 	vimdiff = difftool
 	la = log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr)%Creset %C(blue)<%an>%Creset' --abbrev-commit --all
 	l = log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %C(green)(%ar)%Creset %C(blue)<%aN>%Creset' --abbrev-commit 
