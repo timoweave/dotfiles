@@ -1,5 +1,5 @@
-set_title() { 
-  echo -ne "\033]0;${1}\007" 
+set_title() {
+  echo -ne "\033]0;${1}\007"
 }
 
 env_india() {
@@ -8,7 +8,7 @@ env_india() {
 }
 
 print_path() {
-  echo $PATH | jq -CRs 'split(":")' 
+  echo $PATH | jq -CRs 'split(":")'
 }
 
 # docker_login() {
@@ -17,7 +17,7 @@ print_path() {
 
 # docker_winston() {
 #     local begin_log="node app.js"
-#     docker logs $1 2>&1 | sed -n "/${begin_log}/,\$p" | tail -n +2 
+#     docker logs $1 2>&1 | sed -n "/${begin_log}/,\$p" | tail -n +2
 # }
 
 docker_ps_json() {
@@ -69,7 +69,7 @@ config_brew() {
   if [ $? -eq 0 ]; then return 0; fi
   which ruby >> /dev/null
   if [ $? -eq 0 ]; then return 0; fi
- 
+
   local brew_url="https://raw.githubusercontent.com/Homebrew/install/master/install"
   ruby -e "$(curl -fsSL ${brew_url})"
 }
@@ -140,6 +140,9 @@ config_user() {
   if [ -f ${brew_path}/etc/bash_completion ]; then
     . ${brew_path}/etc/bash_completion
   fi
+
+  shopt -s autocd cdspell
+
 }
 
 config_npm() {
