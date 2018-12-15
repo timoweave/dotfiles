@@ -66,13 +66,13 @@ config_blender() {
   fi
 }
 
-config_make() {
-  # NOTE: something wrong with syntax probably bash4
-  local make_completion=${HOME}/.bash_completion.d/make
-   if [ -f ${make_completion} ]; then
-    source ${make_completion}
-  fi
-}
+# config_make() {
+#   # NOTE: something wrong with syntax probably bash4
+#   local make_completion=${HOME}/.bash_completion.d/make
+#   if [ -f ${make_completion} ]; then
+#     source ${make_completion}
+#   fi
+# }
 
 config_brew() {
   which brew >> /dev/null
@@ -121,8 +121,8 @@ config_git() {
     export GIT_PS1_SHOWDIRTYSTATE=1
     export PS1='🌀\u@\h[\[\033[34m\]\w\[\033[m\]\[\033[31m\]$(__git_ps1 "(%s)")\[\033[m\]]% '
   fi
-
-  local git_completion=${git_core}/git-completion.bash
+  local dotfiles=${HOME}/dotfiles
+  local git_completion=${dotfiles}/git-completion.bash
   if [ -f ${git_completion} ]; then
     source ${git_completion}
   fi
@@ -146,8 +146,6 @@ config_user() {
   if [ -f ${brew_path}/etc/bash_completion ]; then
     . ${brew_path}/etc/bash_completion
   fi
-
-  shopt -s autocd cdspell
 
 }
 
