@@ -28,6 +28,16 @@ docker_bash() {
     docker exec -it $1 bash
 }
 
+config_aws() {
+  which aws >> /dev/null
+  if [ $? -eq 0 ]; then return 0; fi
+
+  which aws_completer >> /dev/null
+  if [ $? -eq 0 ]; then return 0; fi
+
+  complete -C $(which aws_completer) aws
+}
+
 config_go() {
   local dir=/usr/local/go/bin
   if [ -d "${dir}" ]; then
@@ -92,13 +102,9 @@ config_python() {
 }
 
 config_docker() {
-  local docker_completion=${HOME}/.bash_completion.d/docker
   local docker_machine_completion=${HOME}/.bash_completion.d/docker-machine.bash
   local docker_compose_completion=${HOME}/.bash_completion.d/docker-compose
 
-  if [ -f ${docker_completion} ]; then
-    source ${docker_completion}
-  fi
   if [ -f ${docker_machine_completion} ]; then
     source ${docker_machine_completion}
   fi
@@ -113,7 +119,7 @@ config_git() {
   if [ -f ${git_prompt} ]; then
     source ${git_prompt}
     export GIT_PS1_SHOWDIRTYSTATE=1
-    export PS1='🍄\u@\h[\[\033[34m\]\w\[\033[m\]\[\033[31m\]$(__git_ps1 "(%s)")\[\033[m\]]% '
+    export PS1='🌀\u@\h[\[\033[34m\]\w\[\033[m\]\[\033[31m\]$(__git_ps1 "(%s)")\[\033[m\]]% '
   fi
 
   local git_completion=${git_core}/git-completion.bash
@@ -133,7 +139,7 @@ config_user() {
   alias tree='\tree -C -L 2'
   alias ls='\ls -FG'
   alias git_branch="git branch 2>/dev/null | grep '^*' | colrm 1 2"
-  export PS1="\u@\h[\[\033[34m\]\\w\[\033[m\]]\[\033[31m\]\$(git_branch)\[\033[m\]% "
+  export PS1="🌀\u@\h[\[\033[34m\]\\w\[\033[m\]]\[\033[31m\]\$(git_branch)\[\033[m\]% "
 
   # brew install bash-completion
   local brew_path=$(brew --prefix)
@@ -146,7 +152,7 @@ config_user() {
 }
 
 config_npm() {
-  local npm_completion=${HOME}/.bash_npm
+  local npm_completion=${HOME}/.bash_completion.d/npm.bash
   if [ -e "${npm_completion}" ]; then
     source ${npm_completion}
   fi
@@ -196,6 +202,7 @@ config_all() {
   config_chrome
   config_go
   config_iterm2
+  config_aws
 }
 
 config_all
