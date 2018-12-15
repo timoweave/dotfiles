@@ -2,32 +2,6 @@ set_title() {
   echo -ne "\033]0;${1}\007"
 }
 
-env_india() {
-  export country=IN
-  export NODE_ENV=development
-}
-
-print_path() {
-  echo $PATH | jq -CRs 'split(":")'
-}
-
-# docker_login() {
-#     $(aws ecr get-login --region us-west-2 | sed s/-e.none.//)
-# }
-
-# docker_winston() {
-#     local begin_log="node app.js"
-#     docker logs $1 2>&1 | sed -n "/${begin_log}/,\$p" | tail -n +2
-# }
-
-docker_ps_json() {
-  docker ps --all --no-trunc --format '{{ json . }}' | jq '{names: .Names, cmd: .Command, status: .Status, id: .ID }'
-}
-
-docker_bash() {
-    docker exec -it $1 bash
-}
-
 config_aws() {
   which aws >> /dev/null
   if [ $? -eq 0 ]; then return 0; fi
